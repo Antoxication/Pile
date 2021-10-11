@@ -111,26 +111,18 @@ public class Pile {
 	public void empiler(int aEmpiler) throws IllegalStateException {
 		
 		/* on commence par vérifier que la pile n'est pas pleine.
-		 * si tel n'est pa le cas, on lance et propage IllegalStateException livre dollar franc suisse franc pacifique
+		 * Si elle est pleine alors on lance et propage IllegalStateException
+		 * et on affiche un message d'erreur dans la console
 		 */
 		if (estPleine()) {
+			throw new IllegalStateException();
 			
-		}
-		
-		/* on essaye d'empiler */
-		try {
+		/* si la pile n'est pas pleine alors on empile ! */
+		} else {
+			
 			pile[taille] = aEmpiler;
 			taille++;
 			System.out.println("l'entier " + aEmpiler + " a été empilé !\n");
-
-			/*
-			 * si on rencontre une erreur d'indexage dûe à une pile pleine,
-			 * on propage l'exception et affiche un message d'erreur indiquant
-			 * qu'une exception s'est produite (ce qui n'arrête pas le programme)
-			 */
-		} catch (ArrayIndexOutOfBoundsException erreurEmpilement) {
-			System.err.println("aucun nombre entier n'a pu être empilé"
-					+ " car la pile est pleine\n");
 		}
 	}
 
@@ -285,7 +277,11 @@ public class Pile {
 		/* on empile 22, 6 et 9 dans cette pile */
 		int[] tableau1 = {22,6,9};
 		for (int i : tableau1) {
-			pile.empiler(i);
+			try {
+				pile.empiler(i);
+			} catch (IllegalStateException e) {
+				System.err.println("aucun nombre entier n'a pu être empilé"
+						+ " car la pile est pleine\n");			}
 			afficher(pile);
 		}
 
@@ -310,7 +306,11 @@ public class Pile {
 		/* on empile 4, 2 et 3 dans la pile */
 		int[] tableau2 = {4,2,3};
 		for (int i : tableau2) {
-			pile.empiler(i);
+			try {
+				pile.empiler(i);
+			} catch (IllegalStateException e) {
+				System.err.println("aucun nombre entier n'a pu être empilé"
+						+ " car la pile est pleine\n");			}
 			afficher(pile);
 		}
 
@@ -323,7 +323,11 @@ public class Pile {
 		 * on essaye d'empiler l'élément 666 dans la pile,
 		 * un message d'erreur doit normalement ensuite s'afficher
 		 */
-		pile.empiler(666);
+		try {
+			pile.empiler(666);
+		} catch (IllegalStateException e) {
+			System.err.println("aucun nombre entier n'a pu être empilé"
+					+ " car la pile est pleine\n");		}
 		afficher(pile);
 
 		/*
